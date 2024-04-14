@@ -14,7 +14,10 @@ l = linspace(0,T, n);
 u = 5*square(l/1.5*pi);
 
 P = zeros(3,3);
+P(2,2) = (2*pi/180)^2;
+P(1,1) = (110*pi/180)^2;
 P(3,3) = 0.1^2;
+StdNoise = (5*pi/180)^2;
 
 for i = 1:n
     x1 = X(1); x2 = X(2);
@@ -22,7 +25,7 @@ for i = 1:n
     
     J = [1 dt 0;-dt*a*cos(x1) 1-b*dt -x2*dt;0 0 1];
     H = [1 0 0];
-    R = [(110*pi/180)^2 0; 0 (2*pi/180)^2];
+    R = (5*pi/180)^2;
 
     Pu = (5*pi/180)^2;
     Ju = [0;0; dt*c];
@@ -30,5 +33,11 @@ for i = 1:n
     Qu = Ju*Pu*transpose(Ju);
     P = J*P*transpose(J) + Qu;
 
-    X = [x1+dt*x2;x2+ dt*(-a*sin(x1) -b*x2 + 2*u(i))];
+    X_ = [x1+dt*x2;x2+ dt*(-a*sin(x1) -b*x2 + 2*u(i))];
+    noise = randn(1,1)*StdNoise; % Sample of WGN, having standard deviation StdNoise
+    sim =  X_ + noise;
+    dif = sim - X_;
+    X = X_ + K.*dif;
+
+
 end
