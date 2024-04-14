@@ -1,0 +1,15 @@
+
+In this folder:
+
+* "APImtrn4010_v04.p"  :API version 4. it inlcudes a DA helper function. 
+It has the rest of funcitons that were included in previous versions.
+
+* "DemoAPIHelperDA_and_AnimateConnectedSegments.m"
+(or version 2 "DemoAPIHelperDA_and_AnimateConnectedSegments_V02.m")
+Example that shows how  to use the DA function. It also visualizes the successful DAd.
+
+
+JEG. MTRN2024.
+
+
+
